@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using TodoListMVC.Models;
 namespace TodoListMVC.Controllers
 {
@@ -14,25 +15,50 @@ namespace TodoListMVC.Controllers
         {
             _context = new PGDbContext();
         }
+
+        [Authorize]
         public ActionResult Index()
         {
-            var t = _context.Accounts.ToList();
-            var x = _context.Employees.ToList();
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Login()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
-
-        public ActionResult Contact()
+        
+        [HttpPost]
+        public ActionResult Login(string returnUrl, Account account)
         {
-            ViewBag.Message = "Your contact page.";
+            var user = _context.Accounts.Where(x => x.Username == account.Username && x.Password == account.Password).FirstOrDefault();
 
+            if(user != null)
+            {
+                FormsAuthentication.SetAuthCookie(user.Username, false);
+                if(Url.IsLocalUrl(returnUrl) && returnUrl.Length>1 && returnUrl.StartsWith("/")
+                    && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+
+            }
             return View();
         }
+
+        [Authorize]
+        [AllowAnonymous]
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+       
     }
 }
