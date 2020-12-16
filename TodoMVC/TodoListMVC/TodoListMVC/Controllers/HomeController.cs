@@ -59,6 +59,33 @@ namespace TodoListMVC.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-       
+
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SignUp(User user)
+        {
+            var username = _context.Accounts.Where(x => x.Username == user.UserName).FirstOrDefault();
+
+            if (username == null)
+            {
+                _context.Users.Add(user);
+                _context.Accounts.Add(new Account
+                {
+                    Username = user.UserName,
+                    Password = user.Password
+                });
+                _context.SaveChanges();
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+               
+            }
+            return View();
+        }
     }
 }

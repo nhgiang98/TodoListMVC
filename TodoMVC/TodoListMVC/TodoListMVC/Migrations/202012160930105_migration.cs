@@ -7,20 +7,20 @@
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.Tests",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Content = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
+            DropTable("dbo.Products");
         }
         
         public override void Down()
         {
-            DropTable("dbo.Tests");
+            CreateTable(
+                "dbo.Products",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
         }
     }
 }
