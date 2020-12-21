@@ -1,65 +1,68 @@
-﻿@model TodoListMVC.Models.User
-
-@{
+﻿@{
     ViewBag.Title = "SignUp";
 }
 
 <h2>SignUp</h2>
+<br>
 
-
-@using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
-{
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+<div>
+    <form method="post" action="/" id="signup">
+        <div class="form-group row">
+            <label for="ipUsername" class="col-sm-2 col-form-label" style="margin-top:8px;">User name</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName)
-                @Html.ValidationMessageFor(model => model.UserName)
+                <input type="text" class="form-control" id="ipUsername" name="Username" placeholder="User name" required>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group row">
+            <label for="ipPassword" class="col-sm-2 col-form-label" style="margin-top:8px;">Password</label>
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <input type="password" class="form-control" id="ipPassword" name="Password" placeholder="Password" required>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Retype Password", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group row">
+            <label for="ipName" class="col-sm-2 col-form-label" style="margin-top:8px;">Name</label>
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.RetypePassword, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RetypePassword, "", new { @class = "text-danger" })
+                <input type="text" class="form-control" id="ipName" name="name" placeholder="Name" required>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group row">
+            <label for="ipAddress" class="col-sm-2 col-form-label" style="margin-top:8px;">Address</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
+                <input type="text" value="" class="form-control" id="ipAddress" name="Address" placeholder="Address" required>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group row">
+            <label for="ipEmail" class="col-sm-2 col-form-label" style="margin-top:8px;">Email</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email)
+                <input type="email" class="form-control" id="ipEmail" name="email" placeholder="Email" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="ipPhone" class="col-sm-2 col-form-label" style="margin-top:8px;">Phone number</label>
+            <div class="col-md-10">
+                <input type="tel" class="form-control" id="ipPhone" name="PhoneNumber" placeholder="Phone number" required>
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-offset-2 col-md-10" style="margin-left: 16% !important">
+                <button type="submit" onclick="SignUp()" class="btn btn-primary mb-2" id="save">Create</button>
             </div>
         </div>
-    </div>
-}
+    </form>
+</div>
 
+<br />
 <div>
     @Html.ActionLink("Back to login", "Login")
 </div>
+
+@section Scripts{
+    <script src="~/Scripts/home/signup.js"></script>
+}
+

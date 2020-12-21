@@ -1,4 +1,4 @@
-﻿@model TodoListMVC.Models.Account
+﻿@model TodoListMVC.Models.User
 
 @{
     ViewBag.Title = "Login";
@@ -10,38 +10,39 @@
 @using (Html.BeginForm("Login", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true)
-    <div class="form-group">
-        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Username)
-            @Html.ValidationMessageFor(model => model.Username)
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.PasswordFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.Label("User name", new { @class = "col-sm-2 col-form-label",@style="margin-top:8px;"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @placeholder = "User name", @required = true })
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offet-2 col-md-10">
-            <input type="submit" value="Login" class="btn btn-default" />
+        <div class="form-group">
+            @Html.Label("Password", new { @class = "col-sm-2 col-form-label", @style = "margin-top:8px;"})
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password", @required = true })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-primary mb-2" />
+            </div>
         </div>
     </div>
-</div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Go to sign up", "SignUp")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+

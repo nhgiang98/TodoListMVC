@@ -40,7 +40,7 @@ namespace TodoListMVC.Provider
         public override string[] GetRolesForUser(string username)
         {
             _context = new PGDbContext();
-            var data = _context.Accounts.Where(x => x.Username == username).FirstOrDefault().Role;
+            var data = _context.Users.Where(x => x.Username == username).FirstOrDefault().Role;
             string[] result = { data };
             return result;
         }

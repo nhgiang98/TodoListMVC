@@ -1,0 +1,11 @@
+﻿@model PagedList.IPagedList<TodoListMVC.Models.User>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "User";
+}
+
+<h2>List all users</h2>
+<br />
+<div id="user_area">
+    @{Html.RenderAction("GetPaging", "Users", new { page = 1 });}
+</div>

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using TodoListMVC.Common;
+using TodoListMVC.Constant;
 using TodoListMVC.Models;
 namespace TodoListMVC.Controllers
 {
@@ -26,19 +28,24 @@ namespace TodoListMVC.Controllers
         {
             return View();
         }
-        
-        [HttpPost]
-        public ActionResult Login(string returnUrl, Account account)
-        {
-            var user = _context.Accounts.Where(x => x.Username == account.Username && x.Password == account.Password).FirstOrDefault();
 
-            if(user != null)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string returnUrl, User user)
+        {
+            var username = _context.Users.Where(x => x.Username == user.Username && x.Password == user.Password).FirstOrDefault();
+
+            if (user != null)
             {
                 FormsAuthentication.SetAuthCookie(user.Username, false);
-                if(Url.IsLocalUrl(returnUrl) && returnUrl.Length>1 && returnUrl.StartsWith("/")
+                if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                     && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                 {
                     return Redirect(returnUrl);
+                }
+                else if (user.Role == RoleConstant.ADMINROLE)
+                {
+                    return RedirectToAction("Index", "Users");
                 }
                 else
                 {
@@ -47,9 +54,8 @@ namespace TodoListMVC.Controllers
             }
             else
             {
-
+                return View();
             }
-            return View();
         }
 
         [Authorize]
@@ -68,24 +74,25 @@ namespace TodoListMVC.Controllers
         [HttpPost]
         public ActionResult SignUp(User user)
         {
-            var username = _context.Accounts.Where(x => x.Username == user.UserName).FirstOrDefault();
-
+            var username = _context.Users.Where(x => x.Username == user.Username).FirstOrDefault();
+            bool flag = false;
             if (username == null)
             {
-                _context.Users.Add(user);
-                _context.Accounts.Add(new Account
+                _context.Users.Add(new User
                 {
-                    Username = user.UserName,
-                    Password = user.Password
+                    Username = user.Username,
+                    Password = EncryptHelper.Encrypt(user.Password),
+                    Name = user.Name,
+                    Address = user.Address,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Role = RoleConstant.USERROLE,
                 });
                 _context.SaveChanges();
-                return RedirectToAction("Login", "Home");
+                flag = true;
             }
-            else
-            {
-               
-            }
-            return View();
+            return View("SignUp", flag);
         }
+
     }
 }

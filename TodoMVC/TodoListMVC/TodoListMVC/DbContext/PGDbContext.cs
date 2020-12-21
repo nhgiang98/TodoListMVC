@@ -9,8 +9,6 @@ namespace TodoListMVC.Models
     public class PGDbContext : DbContext
     {
         public PGDbContext() : base(nameOrConnectionString: "DefaultConnectionString") { }
-
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Account> Accounts { get; set; }
     }
 }
