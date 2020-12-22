@@ -10,7 +10,7 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "TodoListMVC.Models.PGDbContext";
+            ContextKey = "TodoListMVC.Models.PGDbContext"; 
         }
 
         protected override void Seed(TodoListMVC.Models.PGDbContext context)

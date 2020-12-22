@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using TodoListMVC.Common;
@@ -11,11 +8,11 @@ namespace TodoListMVC.Controllers
 {
     public class HomeController : Controller
     {
-        PGDbContext _context;
+        private PGDbContext _context;
 
-        public HomeController()
+        public HomeController(PGDbContext context)
         {
-            _context = new PGDbContext();
+            _context = context;
         }
 
         [Authorize]
