@@ -18,16 +18,8 @@
         <div class="form-group">
             @Html.Label("User name", new { @class = "col-sm-2 col-form-label", @style = "margin-top:8px;" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @disabled = true })
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @readonly = true })
                 @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, new { @class = "col-sm-2 col-form-label", @style = "margin-top:8px;" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 

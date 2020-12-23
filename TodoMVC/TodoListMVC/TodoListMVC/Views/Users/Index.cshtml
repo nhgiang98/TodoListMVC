@@ -5,7 +5,8 @@
 }
 
 <h2>List all users</h2>
-<br />
+@Html.ActionLink("Add new user", "Create")
+<br/>
 <div id="user_area">
     @{Html.RenderAction("GetPaging", "Users", new { page = 1 });}
 </div>

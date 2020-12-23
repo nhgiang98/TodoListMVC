@@ -3,6 +3,7 @@ using Autofac.Integration.Mvc;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TodoListMVC.Services;
 
 namespace TodoListMVC
 {
@@ -16,6 +17,8 @@ namespace TodoListMVC
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             var builder = new ContainerBuilder();
+
+            builder.RegisterType<UsersService>().As<IUsersService>();
 
             // Register dependencies in controllers
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
