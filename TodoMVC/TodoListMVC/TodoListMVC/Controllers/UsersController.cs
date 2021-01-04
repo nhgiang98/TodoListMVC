@@ -11,12 +11,13 @@ namespace TodoListMVC.Controllers
     public class UsersController : Controller
     {
         private IUsersService _userService;
+
         public UsersController(IUsersService userServices)
         {
             _userService = userServices;
         }
         // GET: Users
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();

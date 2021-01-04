@@ -42,7 +42,7 @@ namespace TodoListMVC.Services
 
         public User GetById(int id)
         {
-            return _context.Users.Find(id);
+            return _context.Users.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public void Update(User user)

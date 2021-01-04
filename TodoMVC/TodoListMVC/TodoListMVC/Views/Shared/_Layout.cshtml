@@ -17,9 +17,15 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Dashboard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+              
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Task", "Index", "Tasks", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+
                     @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                     {
                         <li>@Html.ActionLink("User", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })</li>

@@ -72,7 +72,6 @@ namespace TodoListMVC.Controllers
         public ActionResult SignUp(User user)
         {
             var username = _context.Users.Where(x => x.Username == user.Username).FirstOrDefault();
-            bool flag = false;
             if (username == null)
             {
                 _context.Users.Add(new User
@@ -86,9 +85,8 @@ namespace TodoListMVC.Controllers
                     Role = RoleConstant.USERROLE,
                 });
                 _context.SaveChanges();
-                flag = true;
             }
-            return View("SignUp", flag);
+            return View("SignUp");
         }
 
     }

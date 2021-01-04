@@ -19,6 +19,7 @@ namespace TodoListMVC
             var builder = new ContainerBuilder();
 
             builder.RegisterType<UsersService>().As<IUsersService>();
+            builder.RegisterType<TaskService>().As<ITasksService>();
 
             // Register dependencies in controllers
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
