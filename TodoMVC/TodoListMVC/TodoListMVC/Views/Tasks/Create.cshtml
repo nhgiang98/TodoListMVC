@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Status, new { @class = "col-sm-2 col-form-label", @style = "margin-top:8px;" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Status, new SelectList(Enum.GetValues(typeof(StatusProgress))),"New" , new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Status, new SelectList(Enum.GetValues(typeof(StatusProgress))), "New", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
